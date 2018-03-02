@@ -8,6 +8,8 @@ import java.time.LocalTime;
 import java.time.Month;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * GKislin
@@ -30,6 +32,22 @@ public class UserMealsUtil {
 
     public static List<UserMealWithExceed>  getFilteredWithExceeded(List<UserMeal> mealList, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
         // TODO return filtered list with correctly exceeded field
-        return null;
+      //      Реализовать метод UserMealsUtil.getFilteredWithExceeded:
+//      -  должны возвращаться только записи между startTime и endTime
+//        -  поле UserMealWithExceed.exceed должно показывать,
+//        превышает ли сумма калорий за весь день параметра метода caloriesPerDay
+//
+//      Т.е UserMealWithExceed - это запись одной еды, но поле exceeded будет одинаково для всех записей за этот день.
+//
+//      - Проверте результат выполнения ДЗ (можно проверить логику в http://topjava.herokuapp.com , список еды)
+//      - Оцените Time complexity вашего алгоритма, если он O(N*N)- попробуйте сделать O(N).
+      Map<LocalDateTime, Integer> map = mealList.stream()
+        .collect(Collectors.groupingBy(UserMeal::getDateTime, Collectors.summingInt(UserMeal::getCalories)));
+
+      List<UserMealWithExceed> list = mealList.stream()
+        .filter((m) -> TimeUtil.isBetween(m.getDateTime().toLocalTime(), startTime, endTime))
+        .map(m -> new UserMealWithExceed(m.getDateTime(), m.getDescription(), m.getCalories(), map.get(m.getDateTime()) > caloriesPerDay))
+        .collect(Collectors.toList());
+      return list;
     }
 }
