@@ -7,6 +7,7 @@ import ru.javawebinar.topjava.model.AbstractNamedEntity;
 import ru.javawebinar.topjava.model.Role;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.repository.UserRepository;
+import ru.javawebinar.topjava.util.UsersUtil;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -23,8 +24,10 @@ public class InMemoryUserRepositoryImpl implements UserRepository {
   private AtomicInteger counter = new AtomicInteger(0);
 
   {
-    save(new User("user", "user@yandex.ru", "123456", Role.ROLE_USER));
-    save(new User("admin", "admin@mail.ru", "123456", Role.ROLE_ADMIN));
+    for (User user : UsersUtil.userList)
+    {
+      save(user);
+    }
   }
     @Override
     public boolean delete(int id) {

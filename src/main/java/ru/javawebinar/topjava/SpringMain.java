@@ -19,13 +19,17 @@ public class SpringMain {
             System.out.println("Bean definition names: " + Arrays.toString(appCtx.getBeanDefinitionNames()));
             AdminRestController adminUserController = appCtx.getBean(AdminRestController.class);
             adminUserController.create(new User(null, "userName", "email", "password", Role.ROLE_ADMIN));
-        }
-
-        try (ConfigurableApplicationContext appCtx = new ClassPathXmlApplicationContext("spring/spring-app.xml")) {
           System.out.println("Bean definition names: " + Arrays.toString(appCtx.getBeanDefinitionNames()));
+          System.out.println("\n--------------------MealRestController----------------------");
           MealRestController mealRestController = appCtx.getBean(MealRestController.class);
+          System.out.println("\n-----------------------------create-------------------------");
           mealRestController.create(new Meal(LocalDateTime.of(2015, Month.MAY, 30, 10, 0), "Завтрак", 500));
+          System.out.println("\n-----------------------------delete-------------------------");
           mealRestController.delete(2);
+          System.out.println("\n-----------------------------getAll-------------------------");
+          mealRestController.getAll();
+          System.out.println("\n-----------------------------getAll-------------------------");
+
         }
 
     }
