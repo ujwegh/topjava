@@ -20,6 +20,30 @@
 <section>
     <h3><a href="index.html">Home</a></h3>
     <h2>Meals</h2>
+    <form method="post" action="meals?action=filter">
+      <p>
+        <label for="startDate">От даты</label>
+        <input type="date" name="startDate" id="startDate"/>
+      </p>
+      <p>
+        <label for="endDate">До даты</label>
+        <input type="date" name="endDate" id="endDate"/>
+      </p>
+      <p>
+        <label for="startTime">От времени</label>
+        <input type="time" name="startTime" id="startTime"/>
+      </p>
+      <p>
+        <label for="endTime">До времени</label>
+        <input type="time" name="endTime" id="endTime"/>
+      </p>
+      <p>
+        <button type="submit">Filterrrrr</button>
+      </p>
+    </form>
+
+    <%--<a href="meals?action=filter">Filter Meal</a>--%>
+
     <a href="meals?action=create">Add Meal</a>
     <hr/>
     <table border="1" cellpadding="8" cellspacing="0">

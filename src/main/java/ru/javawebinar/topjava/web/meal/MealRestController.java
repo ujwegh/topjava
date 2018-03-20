@@ -29,7 +29,7 @@ public class MealRestController {
 
   public Collection<MealWithExceed> getAll() {
     log.info("getAll");
-    return MealsUtil.getFilteredWithExceeded(service.getAll(userId),AuthorizedUser.getCaloriesPerDay(), LocalTime.MIN, LocalTime.MAX);
+    return MealsUtil.getFilteredWithExceeded(service.getAll(userId), AuthorizedUser.getCaloriesPerDay(), LocalTime.MIN, LocalTime.MAX);
   }
 
   public Meal get(int id) {
@@ -54,27 +54,21 @@ public class MealRestController {
     service.update(meal, userId);
   }
 
-  public List<MealWithExceed> getBetweenDate(LocalDate startDate, LocalTime startTime,
-                                             LocalDate endDate, LocalTime endTime) {
+  public List<MealWithExceed> getBetweenDate(LocalDate startDate, LocalTime startTime, LocalDate endDate, LocalTime endTime) {
     log.info("getBetweenDate: Date {} and {}, Time {} and {}", startDate, endDate, startTime, endTime);
 
     Collection<Meal> meals;
     if (startDate == null && endDate != null) {
-      meals = service.getBetweenDate(userId, LocalDateTime.of(LocalDate.MIN, LocalTime.MIN),
-        LocalDateTime.of(endDate, LocalTime.MAX));
+      meals = service.getBetweenDate(userId, LocalDateTime.of(LocalDate.MIN, LocalTime.MIN), LocalDateTime.of(endDate, LocalTime.MAX));
     } else if (startDate != null && endDate == null) {
-      meals = service.getBetweenDate(userId, LocalDateTime.of(startDate, LocalTime.MIN),
-        LocalDateTime.of(LocalDate.MAX, LocalTime.MAX));
+      meals = service.getBetweenDate(userId, LocalDateTime.of(startDate, LocalTime.MIN), LocalDateTime.of(LocalDate.MAX, LocalTime.MAX));
     } else if (startDate != null && endDate != null) {
-      meals = service.getBetweenDate(userId, LocalDateTime.of(startDate, LocalTime.MIN),
-        LocalDateTime.of(endDate, LocalTime.MAX));
+      meals = service.getBetweenDate(userId, LocalDateTime.of(startDate, LocalTime.MIN), LocalDateTime.of(endDate, LocalTime.MAX));
     } else {
-      meals = service.getBetweenDate(userId, LocalDateTime.of(LocalDate.MIN, LocalTime.MIN),
-        LocalDateTime.of(LocalDate.MAX, LocalTime.MAX));
+      meals = service.getBetweenDate(userId, LocalDateTime.of(LocalDate.MIN, LocalTime.MIN), LocalDateTime.of(LocalDate.MAX, LocalTime.MAX));
     }
 
-    return MealsUtil.getFilteredWithExceeded(meals, AuthorizedUser.getCaloriesPerDay(), startTime != null ? startTime : LocalTime.MIN,
-      endTime != null ? endTime : LocalTime.MAX);
+    return MealsUtil.getFilteredWithExceeded(meals, AuthorizedUser.getCaloriesPerDay(), startTime != null ? startTime : LocalTime.MIN, endTime != null ? endTime : LocalTime.MAX);
 
   }
 }

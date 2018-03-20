@@ -66,11 +66,8 @@ public class InMemoryMealRepositoryImpl implements MealRepository {
   @Override
   public Collection<Meal> getAll(int userId) {
     Map<Integer, Meal> map = repository.get(userId);
-    if (map != null)
-    {
-      return map.values().stream()
-        .sorted((o1, o2) -> o2.getDateTime().compareTo(o1.getDateTime()))
-        .collect(Collectors.toList());
+    if (map != null) {
+      return map.values().stream().sorted((o1, o2) -> o2.getDateTime().compareTo(o1.getDateTime())).collect(Collectors.toList());
     }
     return Collections.emptyList();
   }
@@ -78,11 +75,8 @@ public class InMemoryMealRepositoryImpl implements MealRepository {
   @Override
   public Collection<Meal> getBetweenDate(int userId, LocalDateTime startDateTime, LocalDateTime endDateTime) {
     Map<Integer, Meal> map = repository.get(userId);
-    if (map != null)
-    {
-      return map.values().stream()
-        .filter(meal -> DateTimeUtil.isBetween(meal.getDateTime().toLocalTime(), startDateTime.toLocalTime(), endDateTime.toLocalTime()))
-        .collect(Collectors.toList());
+    if (map != null) {
+      return map.values().stream().filter(meal -> DateTimeUtil.isBetween(meal.getDateTime().toLocalTime(), startDateTime.toLocalTime(), endDateTime.toLocalTime())).collect(Collectors.toList());
     }
     return Collections.emptyList();
   }
