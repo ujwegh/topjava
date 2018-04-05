@@ -22,12 +22,11 @@ import java.time.LocalTime;
 public class Meal extends AbstractBaseEntity {
     public static final String DELETE = "Meal.delete";
     public static final String GET_BETWEEN = "Meal.getBetween";
-    public static final String ALL_SORTED = "Meal.getAllSorted";
+    public static final String ALL_SORTED = "Meal.getAll";
 
 
     @Column(name = "date_time", nullable = false, unique = true)
-    @NotBlank
-    @Size(max = 100)
+    @NotNull
     private LocalDateTime dateTime;
 
     @Column(name = "description", nullable = false)
