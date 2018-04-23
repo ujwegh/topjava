@@ -20,18 +20,18 @@ import java.util.Objects;
 import static ru.javawebinar.topjava.util.DateTimeUtil.parseLocalDate;
 import static ru.javawebinar.topjava.util.DateTimeUtil.parseLocalTime;
 
-public class MealServlet extends HttpServlet {
+public class MealServlet {
 
     private MealRestController mealController;
 
-    @Override
-    public void init(ServletConfig config) throws ServletException {
-        super.init(config);
-        WebApplicationContext springContext = WebApplicationContextUtils.getRequiredWebApplicationContext(getServletContext());
-        mealController = springContext.getBean(MealRestController.class);
-    }
+//    @Override
+//    public void init(ServletConfig config) throws ServletException {
+//        super.init(config);
+//        WebApplicationContext springContext = WebApplicationContextUtils.getRequiredWebApplicationContext(getServletContext());
+//        mealController = springContext.getBean(MealRestController.class);
+//    }
 
-    @Override
+//    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         String action = request.getParameter("action");
@@ -58,7 +58,7 @@ public class MealServlet extends HttpServlet {
         }
     }
 
-    @Override
+//    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
 
