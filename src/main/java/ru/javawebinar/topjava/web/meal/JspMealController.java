@@ -24,6 +24,7 @@ import static ru.javawebinar.topjava.util.DateTimeUtil.parseLocalDate;
 import static ru.javawebinar.topjava.util.DateTimeUtil.parseLocalTime;
 
 @Controller
+@RequestMapping(value = "/meals")
 public class JspMealController extends AbstractMealController {
 
     protected JspMealController(MealService service) {
@@ -55,7 +56,7 @@ public class JspMealController extends AbstractMealController {
         return "/mealForm";
     }
 
-    @RequestMapping(value = "/delete")
+    @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public String delete(HttpServletRequest request) {
         super.delete(getId(request));
         return "redirect:/meals";
